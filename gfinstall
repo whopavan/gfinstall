@@ -47,12 +47,14 @@ printInfo() {
 }
 
 help() {
-	echo -e "${Bold}Usage:${Rst}\neasy-apache [options]\n\n${Bold}Options:${Rst}\n-f | --full:\t\tFull setup, default option if none is provided\n-a | --apache:\t\tAdding new site (includes apache install)\n-s | --SSL:\t\tInstall SSL certificate for sites available\n-h | --help:\t\tHelp (shows available commands)\n-v | --version:\t\tCheck easy-apache version${Rst}"
-	echo -e "\n${Bold}Example\n${Rst}easy-apache -f\t\t\t#for full installation i.e Apache & SSL certificate\neasy-apache --full\t\t#for full installation i.e Apache & SSL certificate\neasy-apache -a\t\t\t#for installating Apache server\neasy-apache -s\t\t\t#for installating SSL certificate"
+	echo -e "${Bold}${Yellow}Google Fonts Installer${Rst}\n"
+	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l | --local\t\tTo Install fonts locally\n-v | --version\t\tCheck gfinstall version\n-h | --help\t\tDisplays available options${Rst}"
+	echo -e "\n${Bold}Examples\n${Rst}gfinstall montserrat\t\t\t# installs montserrat font globally\ngfinstall --local ubuntu\t\t# install ubuntu font locally\ngfinstall -v\t\t\t\t# to check gfinstall version"
+	echo -e "\nBy default fonts will be installed globally (/usr/share/fonts/)\nIf you want to install it only for the current (local) user then use -l or --local flag"
 }
 
 version() {
-	echo "0.1 Alpha"
+	echo "v1.0"
 }
 
 install() {
@@ -101,6 +103,11 @@ install() {
 	printFailed "Probably invalid argument, type \`gfinstall --help\` to know all commands"
 }
 
+update() {
+	./gflist_update &> /dev/null
+	echo "Updated Google Fonts List"
+}
+
 terminalColors
 if [ "$1" != "" ]
 then
@@ -108,6 +115,7 @@ then
     case $PARAM in
         -h | --help      ) help; exit;;
 		-v | --version   ) version; exit;;
+		-u | --update	 ) update; exit;;
 		-l | --local	 ) install "-l" $2; exit;;
                         *) install "" $1; exit;;
     esac
