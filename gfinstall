@@ -62,6 +62,7 @@ install() {
 	# $1 is the argument
 	# $2 is the font name
 	
+	options=$1
 	fontName=${2,,}
 
 	if [[ -z $fontName ]]
@@ -82,30 +83,32 @@ install() {
 	printNormal "Downloading $fontName from Google Fonts..."
 	svn export https://github.com/google/fonts/trunk/ofl/$fontName /var/tmp/gfFonts --force &> /dev/null
 
-	if [[ -z $1 ]]
+	if [[ -z $options ]]
 	then
 		printNormal "Installing font for all users"
+		return
 		mv /var/tmp/gfFonts/*.ttf /usr/share/fonts/
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
-		return
 	fi
 
-	if [[ $1 == "-l" ]]
+	if [[ $options == "-l" ]]
 	then
 		printNormal "Installing font for all users"
+		return
 		mv /var/tmp/gfFonts/*.ttf ~/.fonts
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
-		return
 	fi
 
-	printFailed "Probably invalid argument, type \`gfinstall --help\` to know all commands"
+	rm -r /var/tmp/gfFonts
+	printFailed "Invalid argument, type \`gfinstall --help\` to know all commands"
 }
 
 update() {
+	printNormal "Updating..."
 	./gflist_update &> /dev/null
-	echo "Updated Google Fonts List"
+	printSuccess "Updated Google Fonts List"
 }
 
 terminalColors
@@ -116,8 +119,10 @@ then
         -h  |  --help      		) help; exit;;
 		-v  |  --version   		) version; exit;;
 		-ul |  --update-list	) update; exit;;
-		-l  |  --local	 		) installLocal $2; exit;;
-                        	   *) installDefault $1; exit;;
+		-l  |  --local	 		) install "-l" $2; exit;;
+							 --*) help; exit;;
+							  -*) help; exit;;
+                        	   *) install "" $1; exit;;
     esac
 fi
 help
