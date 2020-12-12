@@ -54,7 +54,8 @@ help() {
 }
 
 version() {
-	echo "v1.0"
+	version=`apt-cache show easy-apache | grep Version | cut -d ' ' -f2`
+	echo $version
 }
 
 install() {
@@ -86,7 +87,7 @@ install() {
 	if [[ -z $options ]]
 	then
 		printNormal "Installing font for all users"
-		mv /var/tmp/gfFonts/*.ttf /usr/share/fonts/
+		sudo mv /var/tmp/gfFonts/*.ttf /usr/share/fonts/
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
 		return
