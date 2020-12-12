@@ -1,3 +1,9 @@
+gfinstall (1.2-1) focal; urgency=medium
+
+  * Fixed dependecy issues
+
+ -- Pavan Kumar <realpvn@gmail.com>  Sat, 12 Dec 2020 21:22:21 +0530
+
 gfinstall (1.0-1) focal; urgency=medium
 
   * Initial release of gfinstall
