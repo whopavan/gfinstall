@@ -1,7 +1,7 @@
 #/usr/bin/env bash
 _gfinstall_completions()
 {
-        COMPREPLY=($(compgen -W "$(echo `cat ./gflist`;)" "${COMP_WORDS[1]}"))
+        COMPREPLY=($(compgen -W "$(echo `cat ./gflist.txt`;)" "${COMP_WORDS[1]}"))
 }
 
-complete -F _gfinstall_completions easy-apache
+complete -F _gfinstall_completions gfinstall
