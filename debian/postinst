@@ -2,8 +2,8 @@
 
 set -e
 
-echo 'source /usr/share/bash-completion/completions/gfinstall/gflist-completion' >> ~/.bashrc
-source ~/.bashrc
+echo 'source /usr/share/bash-completion/completions/gfinstall/gfinstall-completion.bash' >> ~/.bashrc
+. /usr/share/bash-completion/completions/gfinstall/gfinstall-completion.bash
 echo "done"
 
 #DEBHELPER#
