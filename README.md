@@ -19,10 +19,10 @@ Usage:
 gfinstall [options] [fontNameHere]
 
 Options:
--l  |  --local            To Install fonts locally
--v  |  --version          Check gfinstall version
--ul |  --update-list      To update local google font list
--h  |  --help             Displays available options
+-l   |  --local            To Install fonts locally
+-v   |  --version          Check gfinstall version
+-ul  |  --update-list      To update local google font list
+-h   |  --help             Displays available options
 
 Examples:
 gfinstall montserrat              # installs montserrat font globally
