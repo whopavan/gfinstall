@@ -72,7 +72,7 @@ install() {
 		return
 	fi
 
-	if ! grep -Fxq "$fontName" gflist.txt
+	if ! grep -Fxq "$fontName" /usr/share/bash-completion/completions/gfinstall/gflist.txt
 	then
 		printFailed "Can't find font $fontName "
 		printNormal "Check if the font name is correct"
