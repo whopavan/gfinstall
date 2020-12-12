@@ -86,19 +86,19 @@ install() {
 	if [[ -z $options ]]
 	then
 		printNormal "Installing font for all users"
-		return
 		mv /var/tmp/gfFonts/*.ttf /usr/share/fonts/
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
+		return
 	fi
 
 	if [[ $options == "-l" ]]
 	then
 		printNormal "Installing font for all users"
-		return
 		mv /var/tmp/gfFonts/*.ttf ~/.fonts
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
+		return
 	fi
 
 	rm -r /var/tmp/gfFonts
