@@ -11,7 +11,5 @@ Homepage: https://github.com/realpvn/gfinstall
 Package: gfinstall
 Architecture: all
 Depends: ${misc:Depends}
-Description: It's a google font installer. You can install google fonts directly from your terminal.
- GFInstall helps you install any google font using just terminal, it downloads specified font from google fonts
- and installs it on your system either globally or locally.
- Report any issues on github (https://github.com/realpvn/gfinstall)
+Description: Simple Google font installer. Install google fonts directly from your terminal
+ Downloads specified font from google fonts and installs it on your system
