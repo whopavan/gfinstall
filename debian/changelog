@@ -1,3 +1,9 @@
+gfinstall (1.3-1) focal; urgency=medium
+
+  * Fix versioning & permissions
+
+ -- Pavan Kumar <realpvn@gmail.com>  Sat, 12 Dec 2020 22:25:35 +0530
+
 gfinstall (1.2-1) focal; urgency=medium
 
   * Fixed dependecy issues
