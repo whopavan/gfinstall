@@ -48,7 +48,7 @@ printInfo() {
 
 help() {
 	echo -e "${Bold}${Yellow}Google Fonts Installer${Rst}\n"
-	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\tTo Install fonts locally\n-v  |  --version\t\tCheck gfinstall version\n-h  |  --help\t\tDisplays available options\n-ul |  --update-list\t\tDisplays available options${Rst}"
+	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\tTo Install fonts locally\n-v  |  --version\t\tCheck gfinstall version\n-h  |  --help\t\tDisplays available options\n-ul |  --update-list\t\tUpdates google fonts list${Rst}"
 	echo -e "\n${Bold}Examples\n${Rst}gfinstall montserrat\t\t\t# installs montserrat font globally\ngfinstall --local ubuntu\t\t# install ubuntu font locally\ngfinstall -v\t\t\t\t# to check gfinstall version"
 	echo -e "\nBy default fonts will be installed globally (/usr/share/fonts/)\nIf you want to install it only for the current (local) user then use -l or --local flag"
 }

@@ -1,0 +1,18 @@
+Source: gfinstall
+Section: utils
+Priority: optional
+Maintainer: Pavan Kumar <realpvn@gmail.com>
+Build-Depends: debhelper-compat (= 12)
+Standards-Version: 4.4.1
+Homepage: https://github.com/realpvn/gfinstall
+#Vcs-Browser: https://salsa.debian.org/debian/gfinstall
+#Vcs-Git: https://salsa.debian.org/debian/gfinstall.git
+
+Package: gfinstall
+Architecture: all
+Depends: ${misc:Depends}
+Description: GFInstall is a google font installer. You can install google fonts directly from your terminal.
+ GFInstall helps you install any google font using just terminal, it downloads specified font from google fonts
+ and installs it on your system either globally or locally.
+
+ Report any issues on github (https://github.com/realpvn/gfinstall)
