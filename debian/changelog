@@ -1,5 +1,5 @@
-gfinstall (1.0.1) focal; urgency=medium
+gfinstall (1.0-1) focal; urgency=medium
 
   * Initial release of gfinstall
 
- -- Pavan Kumar <realpvn@gmail.com>  Sat, 12 Dec 2020 10:19:08 +0530
+ -- Pavan Kumar <realpvn@gmail.com>  Sat, 12 Dec 2020 12:45:00 +0530
