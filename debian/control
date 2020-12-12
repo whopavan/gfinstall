@@ -10,6 +10,6 @@ Homepage: https://github.com/realpvn/gfinstall
 
 Package: gfinstall
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, jq (>= 1.5), svn (>= 1.13)
 Description: Simple Google font installer. Install google fonts directly from your terminal
  Downloads specified font from google fonts and installs it on your system

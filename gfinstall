@@ -72,7 +72,7 @@ install() {
 		return
 	fi
 
-	if ! grep -Fxq "$fontName" /usr/share/bash-completion/completions/gfinstall/gflist.txt
+	if ! grep -Fxq "$fontName" /usr/share/bash-completion/completions/gflist.txt
 	then
 		printFailed "Can't find font $fontName "
 		printNormal "Check if the font name is correct"
@@ -106,8 +106,9 @@ install() {
 }
 
 update() {
+	printNormal "Need sudo to update"
+	sudo gflist_update
 	printNormal "Updating..."
-	gflist_update &> /dev/null
 	printSuccess "Updated Google Fonts List"
 }
 

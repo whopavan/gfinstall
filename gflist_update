@@ -5,5 +5,5 @@
 
 fonts_api=$(echo `curl "https://api.github.com/repos/google/fonts/contents/ofl" | jq '.[]'`)
 
-echo $fonts_api | jq -r .name > /usr/share/bash-completion/completions/gfinstall/gflist.txt
+echo $fonts_api | jq -r .name > /usr/share/bash-completion/completions/gflist.txt
 echo "Done"
