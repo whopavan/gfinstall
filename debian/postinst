@@ -3,7 +3,7 @@
 set -e
 
 echo 'source /usr/share/bash-completion/completions/gfinstall/gfinstall-completion.bash' >> ~/.bashrc
-. /usr/share/bash-completion/completions/gfinstall/gfinstall-completion.bash
+source ~/.bashrc
 echo "done"
 
 #DEBHELPER#
