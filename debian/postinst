@@ -3,8 +3,8 @@
 set -e
 
 echo "Source gflist"
-echo 'source /usr/share/bash-completion/completions/gfinstall/gflist.txt' >> ~/.bashrc
-source /usr/share/bash-completion/completions/gfinstall/gflist.txt
+echo 'source /usr/share/bash-completion/completions/gfinstall/gflist-completion' >> ~/.bashrc
+source /usr/share/bash-completion/completions/gfinstall/gflist-completion
 
 #DEBHELPER#
 
