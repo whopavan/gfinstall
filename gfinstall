@@ -107,7 +107,7 @@ install() {
 
 update() {
 	printNormal "Updating..."
-	./gflist_update &> /dev/null
+	gflist_update &> /dev/null
 	printSuccess "Updated Google Fonts List"
 }
 
