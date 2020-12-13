@@ -1,5 +1,5 @@
 #!/bin/bash
-gflistDir = "/usr/share/bash-completion/completions"
+gflistDir="/usr/share/bash-completion/completions"
 
 terminalColors() {
 	# Colors from - https://gist.github.com/5682077.git
@@ -76,11 +76,11 @@ install() {
 		return 1
 	fi
 
-	if ! grep -Fxq "$fontName" $gflist/gflist.txt
+	if ! grep -Fxq "$fontName" `echo $gflistDir`/gflist.txt
 	then
 		printFailed "Can't find font $fontName "
 		printNormal "Check if the font name is correct"
-		printNormal "Run \`gfinstall --update\` and then try installing the font"
+		printNormal "Run \`gfinstall --update-list\` and then try installing the font"
 		return 1
 	fi
 
@@ -112,9 +112,9 @@ install() {
 
 update() {
 	printNormal "Updating..."
-	curl https://raw.githubusercontent.com/realpvn/gfinstall/master/gflist.txt > /var/tmp/gflist.txt
-	sudo rm /var/tmp/gflist.txt
-	sudo mv /var/tmp/gflist.txt $gflist/gflist.txt
+	curl -s 'https://raw.githubusercontent.com/realpvn/gfinstall/master/gflist.txt' > /var/tmp/gflist.txt
+	sudo rm `echo $gflistDir`/gflist.txt
+	sudo mv /var/tmp/gflist.txt `echo $gflistDir`/gflist.txt
 	
 	if [ $? != 0 ]
 	then
