@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# make sure to install jq before doing the update
-# sudo apt install jq or sudo snap install jq
+# this script updates gflist.txt with all google fonts available
+# to use this you must set GOOGLE_API_KEY env variable
 
-fonts_api=$(echo `curl "https://api.github.com/repos/google/fonts/contents/ofl" | jq '.[]'`)
-
-echo $fonts_api | jq -r .name > /usr/share/bash-completion/completions/gflist.txt
-echo "Done"
+echo "`curl -s "https://www.googleapis.com/webfonts/v1/webfonts?key=$GOOGLE_API_KEY&sort=alpha" | jq -r '.items[].family'`\n" > gflist.txt
+echo "Update done"

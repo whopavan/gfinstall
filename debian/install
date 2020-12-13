@@ -1,4 +1,3 @@
 gfinstall usr/bin
-gflist_update usr/bin
 gflist.txt usr/share/bash-completion/completions
 gfinstall.bash usr/share/bash-completion/completions

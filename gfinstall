@@ -1,4 +1,5 @@
 #!/bin/bash
+gflistDir = "/usr/share/bash-completion/completions"
 
 terminalColors() {
 	# Colors from - https://gist.github.com/5682077.git
@@ -51,11 +52,13 @@ help() {
 	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\tTo Install fonts locally\n-v  |  --version\t\tCheck gfinstall version\n-h  |  --help\t\tDisplays available options\n-ul |  --update-list\t\tUpdates google fonts list${Rst}"
 	echo -e "\n${Bold}Examples\n${Rst}gfinstall montserrat\t\t\t# installs montserrat font globally\ngfinstall --local ubuntu\t\t# install ubuntu font locally\ngfinstall -v\t\t\t\t# to check gfinstall version"
 	echo -e "\nBy default fonts will be installed globally (/usr/share/fonts/)\nIf you want to install it only for the current (local) user then use -l or --local flag"
+	return 0
 }
 
 version() {
 	version=`apt-cache show easy-apache | grep Version | cut -d ' ' -f2`
 	echo $version
+	return 0
 }
 
 install() {
@@ -70,15 +73,15 @@ install() {
 	then
 		printFailed "You need to specify font name to be installed"
 		printNormal "Example, gfinstall montserrat"
-		return
+		return 1
 	fi
 
-	if ! grep -Fxq "$fontName" /usr/share/bash-completion/completions/gflist.txt
+	if ! grep -Fxq "$fontName" $gflist/gflist.txt
 	then
 		printFailed "Can't find font $fontName "
 		printNormal "Check if the font name is correct"
 		printNormal "Run \`gfinstall --update\` and then try installing the font"
-		return
+		return 1
 	fi
 
 	printNormal "Downloading $fontName from Google Fonts..."
@@ -90,7 +93,7 @@ install() {
 		sudo mv /var/tmp/gfFonts/*.ttf /usr/share/fonts/
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
-		return
+		return 0
 	fi
 
 	if [[ $options == "-l" ]]
@@ -99,18 +102,28 @@ install() {
 		mv /var/tmp/gfFonts/*.ttf ~/.fonts
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
-		return
+		return 0
 	fi
 
 	rm -r /var/tmp/gfFonts
 	printFailed "Invalid argument, type \`gfinstall --help\` to know all commands"
+	return 1
 }
 
 update() {
-	printNormal "Need sudo to update"
-	sudo gflist_update
 	printNormal "Updating..."
+	curl https://raw.githubusercontent.com/realpvn/gfinstall/master/gflist.txt > /var/tmp/gflist.txt
+	sudo rm /var/tmp/gflist.txt
+	sudo mv /var/tmp/gflist.txt $gflist/gflist.txt
+	
+	if [ $? != 0 ]
+	then
+		printFailed "Failed to update, try again"
+		return 1
+	fi
+
 	printSuccess "Updated Google Fonts List"
+	return 0
 }
 
 terminalColors
