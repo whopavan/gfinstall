@@ -90,6 +90,12 @@ install() {
 	if [[ -z $options ]]
 	then
 		printNormal "Installing font for all users"
+		
+		if [ ! -e /var/tmp/gfFonts ]
+		then
+			mkdir /var/tmp/gfFonts
+		fi
+		
 		sudo mv /var/tmp/gfFonts/*.ttf /usr/share/fonts/
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
@@ -99,6 +105,12 @@ install() {
 	if [[ $options == "-l" ]]
 	then
 		printNormal "Installing font for all users"
+		
+		if [ ! -e /var/tmp/gfFonts ]
+		then
+			mkdir /var/tmp/gfFonts
+		fi
+
 		mv /var/tmp/gfFonts/*.ttf ~/.fonts
 		rm -r /var/tmp/gfFonts
 		printSuccess "$fontName Installed"
