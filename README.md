@@ -1,6 +1,6 @@
 # Google Fonts Installer (gfinstall)
 GFInstall is a google font installer. You can install google fonts directly from your terminal.
-One good thing, when you double tab it try will auto complete font name so you can get your font installed as soon as possible.
+One good thing, when you double tab it will try to auto complete font name so you can get your font installed as soon as possible.
 
 ### Install
 ```
