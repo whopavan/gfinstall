@@ -27,7 +27,7 @@ Options:
 
 Examples:
 gfinstall montserrat              # installs montserrat font globally
-gfinstall --local ubuntu          # install ubuntu font locally
+gfinstall --local ubuntu          # installs ubuntu font locally
 gfinstall -v                      # to check gfinstall version
 ```
 By default fonts will be installed globally (`/usr/share/fonts/`), if you want to install it only for the current user then use `-l` or `--local` flag
