@@ -10,7 +10,7 @@ sudo apt install gfinstall
 
 ### Run
 ```
-gfinstall poppins
+gfinstall {fontNameHere}
 ```
 
 ### Usage & options
@@ -25,9 +25,9 @@ Options:
 -h   |  --help             Displays available options
 
 Examples:
-gfinstall montserrat              # installs montserrat font globally
-gfinstall --local ubuntu          # installs ubuntu font locally
-gfinstall -v                      # to check gfinstall version
+gfinstall montserrat                  # installs montserrat font globally
+gfinstall --local montserrat          # installs ubuntu font locally
+gfinstall -v                          # to check gfinstall version
 ```
 By default fonts will be installed globally (`/usr/share/fonts/`), if you want to install it only for the current user then use `-l` or `--local` flag
 
