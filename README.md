@@ -27,7 +27,7 @@ Options:
 
 Examples:
 gfinstall montserrat                  # installs montserrat font globally
-gfinstall --local montserrat          # installs ubuntu font locally
+gfinstall --local montserrat          # installs montserrat font locally
 gfinstall -v                          # to check gfinstall version
 ```
 
