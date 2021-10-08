@@ -49,25 +49,21 @@ printInfo() {
 
 help() {
 	echo -e "${Bold}${Yellow}Google Fonts Installer${Rst}\n"
-	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\tTo Install fonts locally\n-v  |  --version\t\tCheck gfinstall version\n-h  |  --help\t\tDisplays available options\n-ul |  --update-list\t\tUpdates google fonts list${Rst}"
+	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\t\t\tTo Install fonts locally\n-v  |  --version\t\t\tCheck gfinstall version\n-h  |  --help\t\t\t\tDisplays available options\n-ul |  --update-list\t\t\tUpdates google fonts list${Rst}"
 	echo -e "\n${Bold}Examples\n${Rst}gfinstall montserrat\t\t\t# installs montserrat font globally\ngfinstall --local ubuntu\t\t# install ubuntu font locally\ngfinstall -v\t\t\t\t# to check gfinstall version"
 	echo -e "\nBy default fonts will be installed globally (/usr/share/fonts/)\nIf you want to install it only for the current (local) user then use -l or --local flag"
 	return 0
 }
 
 version() {
-	version=`apt-cache show easy-apache | grep Version | cut -d ' ' -f2`
+	version=`apt-cache show gfinstall | grep Version | cut -d ' ' -f2`
 	echo $version
 	return 0
 }
 
 install() {
-
-	# $1 is the argument
-	# $2 is the font name
-	
-	options=$1
-	fontName=${2,,}
+	options=$1 			# options
+	fontName=${2,,}		# font name
 
 	if [[ -z $fontName ]]
 	then
