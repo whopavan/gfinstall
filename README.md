@@ -12,6 +12,7 @@ sudo apt install gfinstall
 ```
 gfinstall {fontNameHere}
 ```
+By default fonts will be installed globally (`/usr/share/fonts/`), if you want to install it only for the current user then use `-l` or `--local` flag.
 
 ### Usage & options
 ```
@@ -29,7 +30,6 @@ gfinstall montserrat                  # installs montserrat font globally
 gfinstall --local montserrat          # installs ubuntu font locally
 gfinstall -v                          # to check gfinstall version
 ```
-By default fonts will be installed globally (`/usr/share/fonts/`), if you want to install it only for the current user then use `-l` or `--local` flag
 
 ### Supported
 - Ubuntu (20.04)
