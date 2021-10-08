@@ -1,3 +1,9 @@
+gfinstall (1.5-1) focal; urgency=medium
+
+  * Fixed invalid version number being displayed
+
+ -- Pavan Kumar <realpvn@gmail.com>  Fri, 08 Oct 2021 19:26:11 +0530
+
 gfinstall (1.4-1) focal; urgency=medium
 
   * Improvements to how update list works
