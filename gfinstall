@@ -1,5 +1,4 @@
 #!/bin/bash
-gflistDir="/usr/share/bash-completion/completions"
 
 terminalColors() {
 	# Colors from - https://gist.github.com/5682077.git
@@ -72,20 +71,18 @@ install() {
 		return 1
 	fi
 
-	if ! grep -Fxq "$fontName" `echo $gflistDir`/gflist.txt
+	printNormal "Fetching $fontName font from Google Fonts..."
+	svn export https://github.com/google/fonts/trunk/ofl/$fontName /var/tmp/gfFonts --force &> /dev/null
+
+	if [ $? != 0 ]
 	then
-		printFailed "Can't find font $fontName "
-		printNormal "Check if the font name is correct"
-		printNormal "Run \`gfinstall --update-list\` and then try installing the font"
+		printFailed "Font $fontName not found"
 		return 1
 	fi
 
-	printNormal "Downloading $fontName from Google Fonts..."
-	svn export https://github.com/google/fonts/trunk/ofl/$fontName /var/tmp/gfFonts --force &> /dev/null
-
 	if [[ -z $options ]]
 	then
-		printNormal "Installing font for all users"
+		printNormal "Installing font globally"
 		
 		if [ ! -e /var/tmp/gfFonts ]
 		then
@@ -100,7 +97,7 @@ install() {
 
 	if [[ $options == "-l" ]]
 	then
-		printNormal "Installing font for all users"
+		printNormal "Installing font locally"
 		
 		if [ ! -e /var/tmp/gfFonts ]
 		then
@@ -121,15 +118,17 @@ install() {
 update() {
 	printNormal "Updating..."
 	curl -s 'https://raw.githubusercontent.com/realpvn/gfinstall/master/gflist.txt' > /var/tmp/gflist.txt
-	sudo rm `echo $gflistDir`/gflist.txt
-	sudo mv /var/tmp/gflist.txt `echo $gflistDir`/gflist.txt
+	newFontsList=`echo $(cat /var/tmp/gflist.txt)`
+	sed -i '/^fontsList=*/c\fontsList="'"$newFontsList"'"' "/usr/share/bash-completion/completions/gfinstall.bash"
 	
 	if [ $? != 0 ]
 	then
+		sudo rm /var/tmp/gflist.txt
 		printFailed "Failed to update, try again"
 		return 1
 	fi
 
+	sudo rm /var/tmp/gflist.txt
 	printSuccess "Updated Google Fonts List"
 	return 0
 }
