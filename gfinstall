@@ -48,9 +48,9 @@ printInfo() {
 
 help() {
 	echo -e "${Bold}${Yellow}Google Fonts Installer${Rst}\n"
-	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\t\t\tTo Install fonts locally\n-v  |  --version\t\t\tCheck gfinstall version\n-h  |  --help\t\t\t\tDisplays available options\n-ul |  --update-list\t\t\tUpdates google fonts list${Rst}"
+	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\t\t\tTo Install fonts locally\n-v  |  --version\t\t\tCheck gfinstall version\n-h  |  --help\t\t\t\tDisplays available options${Rst}"
 	echo -e "\nBy default fonts will be installed globally (/usr/share/fonts/)\nIf you want to install it only for the current (local) user then use -l or --local flag"
-	echo -e "\n${Bold}Examples\n${Rst}gfinstall montserrat\t\t\t# installs montserrat font globally\ngfinstall --local ubuntu\t\t# install ubuntu font locally\ngfinstall -v\t\t\t\t# to check gfinstall version"
+	echo -e "\n${Bold}Examples\n${Rst}gfinstall montserrat\t\t\t# install montserrat font globally\ngfinstall --local ubuntu\t\t# install ubuntu font locally\ngfinstall -v\t\t\t\t# to check gfinstall version"
 	return 0
 }
 
@@ -115,24 +115,6 @@ install() {
 	return 1
 }
 
-update() {
-	printNormal "Updating..."
-	curl -s 'https://raw.githubusercontent.com/realpvn/gfinstall/master/gflist.txt' > /var/tmp/gflist.txt
-	newFontsList=`echo $(cat /var/tmp/gflist.txt)`
-	sed -i '/^fontsList=*/c\fontsList="'"$newFontsList"'"' "/usr/share/bash-completion/completions/gfinstall.bash"
-	
-	if [ $? != 0 ]
-	then
-		sudo rm /var/tmp/gflist.txt
-		printFailed "Failed to update, try again"
-		return 1
-	fi
-
-	sudo rm /var/tmp/gflist.txt
-	printSuccess "Updated Google Fonts List"
-	return 0
-}
-
 terminalColors
 if [ "$1" != "" ]
 then
@@ -140,7 +122,6 @@ then
     case $PARAM in
         -h  |  --help      		) help; exit;;
 		-v  |  --version   		) version; exit;;
-		-ul |  --update-list	) update; exit;;
 		-l  |  --local	 		) install "-l" $2; exit;;
 							 --*) help; exit;;
 							  -*) help; exit;;
