@@ -7,7 +7,7 @@ _gfinstall()
         local cur prev opts
         cur="${COMP_WORDS[COMP_CWORD]}"
         prev="${COMP_WORDS[COMP_CWORD-1]}"
-        opts="--help --version --local --update-list"
+        opts="--help --version --local"
 
         totalArgs=${#COMP_WORDS[@]}
         case $totalArgs in

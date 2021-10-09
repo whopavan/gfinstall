@@ -15,6 +15,7 @@ currentVersion() {
 makeDeb () {
     echo "Running make"
     clean
+    updateGFList
     read -p "Have you updated version? (Y/N): " verUpdate
     case $verUpdate in
         [Yy]* ) echo "Continuing....";;
@@ -33,7 +34,6 @@ makeDeb () {
 }
 
 buildDebSource () {
-    updateGFList
     makeDeb
     debuild -S
     read -p "Do you want to upload Package to PPA? (Y/N): " wantUpload
@@ -51,7 +51,6 @@ buildDebBinary () {
                 exit;;
             * ) exit;;
     esac
-    updateGFList
     makeDeb
     debuild
 }
@@ -95,12 +94,12 @@ fetchLatestGF() {
 }
 
 updateGFList() {
-	echo "Updating google fonts list"
+	echo "Updating Google Fonts list"
     fetchLatestGF
 
     if [ $? != 0 ]
 	then
-		printFailed "Failed to fetch latest google fonts"
+		printFailed "Failed to fetch latest Google Fonts"
 		return 1
 	fi
 
@@ -109,11 +108,9 @@ updateGFList() {
 	
 	if [ $? != 0 ]
 	then
-		printFailed "Failed to update google fonts list"
+		printFailed "Failed to update Google Fonts list"
 		return 1
 	fi
-
-	echo "Updated Google Fonts List"
 	return 0
 }
 
