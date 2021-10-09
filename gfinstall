@@ -72,7 +72,7 @@ install() {
 	fi
 
 	printNormal "Fetching $fontName font from Google Fonts..."
-	svn export https://github.com/google/fonts/trunk/ofl/$fontName /var/tmp/gfFonts --force &> /dev/null
+	svn export https://github.com/google/fonts/trunk/ofl/$fontName /var/tmp/gfFonts --force
 
 	if [ $? != 0 ]
 	then
@@ -115,6 +115,18 @@ install() {
 	return 1
 }
 
+checkInternet() {
+	ping -c 3 google.com
+	if [ $? != 0 ]
+	then
+		printFailed "No internet"
+		return 1
+	fi
+
+	printSuccess "Internet"
+	return 0
+}
+
 terminalColors
 if [ "$1" != "" ]
 then
@@ -123,6 +135,7 @@ then
         -h  |  --help      		) help; exit;;
 		-v  |  --version   		) version; exit;;
 		-l  |  --local	 		) install "-l" $2; exit;;
+		-c	 		) checkInternet; exit;;
 							 --*) help; exit;;
 							  -*) help; exit;;
                         	   *) install "" $1; exit;;
