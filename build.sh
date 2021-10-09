@@ -43,7 +43,7 @@ buildDebSource () {
 
 buildDebBinary () {
     echo "[!] Binary file cannot be uploaded to PPA"
-    read -p "This will deleted any deb source files, do you want to proceed? (Y/N): " cleanNow
+    read -p "This will delete any deb source files, do you want to proceed? (Y/N): " cleanNow
     case $cleanNow in
         [Yy]* ) echo "Continuing....";;
         [Nn]* ) echo "You must clean to build binary, exiting..."
