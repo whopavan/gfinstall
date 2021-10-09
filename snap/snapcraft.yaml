@@ -1,0 +1,24 @@
+name: gfinstall
+base: core18
+version: '1.5-1'
+summary: GFInstall is a simple shell script that helps to install google fonts
+description: |
+  GFInstall is a simple shell script that helps to install google fonts directly from your terminal.
+  When you press the tab it tries to auto-complete the font name you're looking for.
+
+grade: stable
+confinement: strict
+
+apps:
+  gfinstall:
+    command: gfinstall
+    completer: gfinstall.bash
+
+parts:
+  gfinstall:
+    source: https://github.com/realpvn/gfinstall/archive/refs/tags/v1.5-1.tar.gz
+    plugin: dump
+    build-packages:
+      - jq
+      - subversion
+
