@@ -1,5 +1,4 @@
 #!/bin/bash
-gflistDir="/usr/share/bash-completion/completions"
 
 terminalColors() {
 	# Colors from - https://gist.github.com/5682077.git
@@ -49,9 +48,9 @@ printInfo() {
 
 help() {
 	echo -e "${Bold}${Yellow}Google Fonts Installer${Rst}\n"
-	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\t\t\tTo Install fonts locally\n-v  |  --version\t\t\tCheck gfinstall version\n-h  |  --help\t\t\t\tDisplays available options\n-ul |  --update-list\t\t\tUpdates google fonts list${Rst}"
-	echo -e "\n${Bold}Examples\n${Rst}gfinstall montserrat\t\t\t# installs montserrat font globally\ngfinstall --local ubuntu\t\t# install ubuntu font locally\ngfinstall -v\t\t\t\t# to check gfinstall version"
+	echo -e "${Bold}Usage:${Rst}\ngfinstall fontNameHere\n\n${Bold}Options:${Rst}\n-l  |  --local\t\t\t\tTo Install fonts locally\n-v  |  --version\t\t\tCheck gfinstall version\n-h  |  --help\t\t\t\tDisplays available options${Rst}"
 	echo -e "\nBy default fonts will be installed globally (/usr/share/fonts/)\nIf you want to install it only for the current (local) user then use -l or --local flag"
+	echo -e "\n${Bold}Examples\n${Rst}gfinstall montserrat\t\t\t# install montserrat font globally\ngfinstall --local ubuntu\t\t# install ubuntu font locally\ngfinstall -v\t\t\t\t# to check gfinstall version"
 	return 0
 }
 
@@ -72,20 +71,18 @@ install() {
 		return 1
 	fi
 
-	if ! grep -Fxq "$fontName" `echo $gflistDir`/gflist.txt
+	printNormal "Fetching $fontName font from Google Fonts..."
+	svn export https://github.com/google/fonts/trunk/ofl/$fontName /var/tmp/gfFonts --force &> /dev/null
+
+	if [ $? != 0 ]
 	then
-		printFailed "Can't find font $fontName "
-		printNormal "Check if the font name is correct"
-		printNormal "Run \`gfinstall --update-list\` and then try installing the font"
+		printFailed "Font $fontName not found"
 		return 1
 	fi
 
-	printNormal "Downloading $fontName from Google Fonts..."
-	svn export https://github.com/google/fonts/trunk/ofl/$fontName /var/tmp/gfFonts --force &> /dev/null
-
 	if [[ -z $options ]]
 	then
-		printNormal "Installing font for all users"
+		printNormal "Installing font globally"
 		
 		if [ ! -e /var/tmp/gfFonts ]
 		then
@@ -100,7 +97,7 @@ install() {
 
 	if [[ $options == "-l" ]]
 	then
-		printNormal "Installing font for all users"
+		printNormal "Installing font locally"
 		
 		if [ ! -e /var/tmp/gfFonts ]
 		then
@@ -118,22 +115,6 @@ install() {
 	return 1
 }
 
-update() {
-	printNormal "Updating..."
-	curl -s 'https://raw.githubusercontent.com/realpvn/gfinstall/master/gflist.txt' > /var/tmp/gflist.txt
-	sudo rm `echo $gflistDir`/gflist.txt
-	sudo mv /var/tmp/gflist.txt `echo $gflistDir`/gflist.txt
-	
-	if [ $? != 0 ]
-	then
-		printFailed "Failed to update, try again"
-		return 1
-	fi
-
-	printSuccess "Updated Google Fonts List"
-	return 0
-}
-
 terminalColors
 if [ "$1" != "" ]
 then
@@ -141,7 +122,6 @@ then
     case $PARAM in
         -h  |  --help      		) help; exit;;
 		-v  |  --version   		) version; exit;;
-		-ul |  --update-list	) update; exit;;
 		-l  |  --local	 		) install "-l" $2; exit;;
 							 --*) help; exit;;
 							  -*) help; exit;;

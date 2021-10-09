@@ -1,3 +1,10 @@
+gfinstall (1.6-1) focal; urgency=medium
+
+  * Major improvements to auto completion
+  * Removed gflist.txt file
+
+ -- Pavan Kumar <realpvn@gmail.com>  Sat, 09 Oct 2021 16:29:14 +0530
+
 gfinstall (1.5-1) focal; urgency=medium
 
   * Fixed invalid version number being displayed

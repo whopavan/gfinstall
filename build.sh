@@ -15,6 +15,7 @@ currentVersion() {
 makeDeb () {
     echo "Running make"
     clean
+    updateGFList
     read -p "Have you updated version? (Y/N): " verUpdate
     case $verUpdate in
         [Yy]* ) echo "Continuing....";;
@@ -43,7 +44,7 @@ buildDebSource () {
 
 buildDebBinary () {
     echo "[!] Binary file cannot be uploaded to PPA"
-    read -p "This will deleted any deb source files, do you want to proceed? (Y/N): " cleanNow
+    read -p "This will delete any deb source files, do you want to proceed? (Y/N): " cleanNow
     case $cleanNow in
         [Yy]* ) echo "Continuing....";;
         [Nn]* ) echo "You must clean to build binary, exiting..."
@@ -71,6 +72,48 @@ clean () {
     rm -f ../gfinstall_*
 }
 
+fetchLatestGF() {
+    # This function updates gflist with all google fonts available
+    # To use this you must set GOOGLE_API_KEY env variable
+
+    # In the first time `apiData=` we get data from the api
+    # Then we parse api data and copy it to gflist file
+    #       - `echo ${apiData,,}` will convert everything to lowercase
+    #       - `jq -r` is responsible for parsing api data (keep in mind that all data have been lowered before parsing,
+    #         might be bad but it stays till I find better solution)
+    #       - `tr -d ' '` will get rid of all the spaces in between names and write the output to gflist file
+
+    apiData=`curl -s "https://www.googleapis.com/webfonts/v1/webfonts?key=$GOOGLE_API_KEY&sort=alpha"`
+    echo ${apiData,,} | jq -r '.items[].family' | tr -d ' ' > fonts_list/gflist
+
+    if [ $? != 0 ]
+	then
+		return 1
+	fi
+    return 0
+}
+
+updateGFList() {
+	echo "Updating Google Fonts list"
+    fetchLatestGF
+
+    if [ $? != 0 ]
+	then
+		printFailed "Failed to fetch latest Google Fonts"
+		return 1
+	fi
+
+	newFontsList=`echo $(cat fonts_list/gflist)`
+	sed -i '/^fontsList=*/c\fontsList="'"$newFontsList"'"' 'gfinstall.bash'
+	
+	if [ $? != 0 ]
+	then
+		printFailed "Failed to update Google Fonts list"
+		return 1
+	fi
+	return 0
+}
+
 uploadPPA () {
     echo "Current version: $fullCurVer"
     read -p "Is the current version correct? (Y/N): " verCheck
@@ -88,18 +131,20 @@ then
     currentVersion
     PARAM=$1
     case $PARAM in
-        -ds | --debSource ) buildDebSource;
-                            exit;;
-        -db | --debBinary ) buildDebBinary;
-                            exit;;
-        -c  | --clean     ) clean;
-                            exit;;
-        -d  | --debug     ) debug;
-                            exit;;
-        -u | --uploadPPA  ) uploadPPA;
-                            exit;;
-                        * ) echo -e "Usage:\n-ds | --debSource:\t Generates debian source file\n-db | --debBinary:\t Generates debian binary file\n-sn | --snap:\t\t Generates Snap Package\n-c | --clean:\t\t Cleans directory, removes all build files etc\n-u | --uploadPPA:\t Uploads source file to PPA";
-                            exit;;
+        -ds | --debSource   ) buildDebSource;
+                                exit;;
+        -db | --debBinary   ) buildDebBinary;
+                                exit;;
+        -c  | --clean       ) clean;
+                                exit;;
+        -d  | --debug       ) debug;
+                                exit;;
+        -ul | --update-list ) updateGFList;
+                                exit;;
+        -u | --uploadPPA    ) uploadPPA;
+                                exit;;
+                          * ) echo -e "Usage:\n-ds | --debSource:\t Generates debian source file\n-db | --debBinary:\t Generates debian binary file\n-sn | --snap:\t\t Generates Snap Package\n-c | --clean:\t\t Cleans directory, removes all build files etc\n-u | --uploadPPA:\t Uploads source file to PPA";
+                                exit;;
     esac
 fi
 echo -e "Usage:\n-ds | --debSource:\t Generates debian source file\n-db | --debBinary:\t Generates debian binary file\n-sn | --snap:\t Generates Snap Package\n-c | --clean:\t\t Cleans directory, removes all build files etc\n-u | --uploadPPA:\t Uploads source file to PPA";
