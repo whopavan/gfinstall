@@ -5,7 +5,7 @@ GFInstall is a simple shell script that helps to install google fonts directly f
 ```
 sudo apt update
 
-# For minimal ubuntu installations
+# Run below command for minimal ubuntu installations only (ex: ubuntu docker image)
 sudo apt install software-properties-common
 
 sudo add-apt-repository ppa:realpvn/gfinstall
