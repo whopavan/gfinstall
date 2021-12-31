@@ -1,3 +1,9 @@
+gfinstall (1.7-1) focal; urgency=medium
+
+  * Added new fonts
+
+ -- Pavan Kumar <realpvn@gmail.com>  Fri, 31 Dec 2021 17:38:35 +0530
+
 gfinstall (1.6-1) focal; urgency=medium
 
   * Major improvements to auto completion
