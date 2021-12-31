@@ -1,3 +1,5 @@
+#!/bin/bash
+
 curVer=0
 fullCurVer=0
 updateDebVersion() {
