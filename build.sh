@@ -86,6 +86,7 @@ fetchLatestGF() {
     #       - `tr -d ' '` will get rid of all the spaces in between names and write the output to gflist file
 
     apiData=`curl -s "https://www.googleapis.com/webfonts/v1/webfonts?key=$GOOGLE_API_KEY&sort=alpha"`
+    mkdir -p fonts_list
     echo ${apiData,,} | jq -r '.items[].family' | tr -d ' ' > fonts_list/gflist
 
     if [ $? != 0 ]
