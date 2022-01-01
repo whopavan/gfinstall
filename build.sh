@@ -146,8 +146,8 @@ then
                                 exit;;
         -u | --uploadPPA    ) uploadPPA;
                                 exit;;
-                          * ) echo -e "Usage:\n-ds | --debSource:\t Generates debian source file\n-db | --debBinary:\t Generates debian binary file\n-sn | --snap:\t\t Generates Snap Package\n-c | --clean:\t\t Cleans directory, removes all build files etc\n-u | --uploadPPA:\t Uploads source file to PPA";
+                          * ) echo -e "Usage:\n-ds | --debSource:\t Generates debian source file\n-db | --debBinary:\t Generates debian binary file\n-d | --debug:\t Debug build issues\n-c | --clean:\t\t Cleans directory, removes all build files etc\n-ul | --update-list:\t\t Cleans directory, removes all build files etc\n-u | --uploadPPA:\t Uploads source file to PPA"
                                 exit;;
     esac
 fi
-echo -e "Usage:\n-ds | --debSource:\t Generates debian source file\n-db | --debBinary:\t Generates debian binary file\n-sn | --snap:\t Generates Snap Package\n-c | --clean:\t\t Cleans directory, removes all build files etc\n-u | --uploadPPA:\t Uploads source file to PPA";
+echo -e "Usage:\n-ds | --debSource:\t Generates debian source file\n-db | --debBinary:\t Generates debian binary file\n-d | --debug:\t Debug build issues\n-c | --clean:\t\t Cleans directory, removes all build files etc\n-ul | --update-list:\t\t Cleans directory, removes all build files etc\n-u | --uploadPPA:\t Uploads source file to PPA";
