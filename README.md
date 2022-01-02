@@ -44,7 +44,5 @@ gfinstall --local montserrat          # installs montserrat font locally
 gfinstall -v                          # to check gfinstall version
 ```
 
-### Supported
+### Currently Supported
 - Ubuntu (20.04)
-
-I will update supported list when I test on multiple platforms
