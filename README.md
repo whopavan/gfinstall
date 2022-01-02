@@ -41,7 +41,7 @@ First 2 lines enables bash script completion compatibility mode in zsh, last lin
 ```
 autoload bashcompinit
 bashcompinit
-source /usr/share/bash-completion/completions/gfinstall.bash
+source /usr/share/bash-completion/completions/gfinstall
 ```
 
 ### Currently Supported

@@ -107,7 +107,7 @@ updateGFList() {
 	fi
 
 	newFontsList=`echo $(cat fonts_list/gflist)`
-	sed -i '/^fontsList=*/c\fontsList="'"$newFontsList"'"' 'gfinstall.bash'
+	sed -i '/^fontsList=*/c\fontsList="'"$newFontsList"'"' 'autocomplete/gfinstall'
 	
 	if [ $? != 0 ]
 	then

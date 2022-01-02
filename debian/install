@@ -1,2 +1,2 @@
 gfinstall usr/bin
-gfinstall.bash usr/share/bash-completion/completions
+autocomplete/gfinstall usr/share/bash-completion/completions

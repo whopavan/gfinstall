@@ -1,1 +1,5 @@
 fonts_list/*
+.vscode/
+debian/.debhelper/*
+debian/gfinstall/
+debian/gfinstall/*
