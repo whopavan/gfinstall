@@ -16,7 +16,6 @@ sudo apt install gfinstall
 ```
 gfinstall {fontNameHere}
 ```
-By default fonts will be installed globally (`/usr/share/fonts/`), if you want to install it only for the current user then use `-l` or `--local` flag.
 
 ### Auto Completion in ZSH
 If you are using zsh as your main shell, you might want to run below commands to get gfinstall autocompletions working for you.<br>
@@ -29,6 +28,7 @@ source /usr/share/bash-completion/completions/gfinstall.bash
 ```
 
 ### Usage & options
+By default fonts will be installed globally (`/usr/share/fonts/`), if you want to install it only for the current user then use `-l` or `--local` flag.
 ```
 Usage:
 gfinstall [options] [fontNameHere]
